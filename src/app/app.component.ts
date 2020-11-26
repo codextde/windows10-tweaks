@@ -10,23 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  // public version: string = version;
+  public version: string = '1';
   public appPages = [
     {
       title: 'Home',
       url: '/',
       icon: 'home',
     },
-    {
-      title: 'Easy Backup',
-      url: '/backup',
-      icon: 'disc',
-    },
-    {
-      title: 'Profil Backup & Restore',
-      url: '/backuprestore',
-      icon: 'archive',
-    },
+
     /* {
       title: 'Iventarisierung',
       url: '/inventar',

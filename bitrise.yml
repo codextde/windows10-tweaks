@@ -1,0 +1,41 @@
+---
+format_version: '8'
+default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+project_type: other
+trigger_map:
+  - push_branch: '*'
+    workflow: primary
+  - pull_request_source_branch: '*'
+    workflow: primary
+workflows:
+  primary:
+    steps:
+      - activate-ssh-key:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone: {}
+      - npm:
+          inputs:
+            - command: install
+      - script:
+          title: Build
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                # fail if any commands fails
+                set -e
+                # debug log
+                set -x
+
+                npm run electron:windows
+                mkdir released
+                node build/copy-file.js
+      - ftp-upload:
+          inputs:
+            - username: $codext_ftp_upload
+            - password: $codext_ftp_password
+            - upload_source_path: $BITRISE_SOURCE_DIR/released/
+            - upload_target_path: windows10-tweaks/
+            - hostname: $plesk_server
+      - deploy-to-bitrise-io:
+          inputs:
+            - deploy_path: $BITRISE_SOURCE_DIR/released/

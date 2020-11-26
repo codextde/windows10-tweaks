@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Backup & Restore </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment mode="ios" (ionChange)="segmentChanged($event)" value="backup">
+    <ion-segment-button mode="ios" value="backup">
+      <ion-label>Backup</ion-label>
+    </ion-segment-button>
+    <ion-segment-button mode="ios" value="restore">
+      <ion-label>Restore</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="mode == 'backup'" class="ion-margin-top">
+    <ion-list>
+      <ion-list-header> 1. Wählen Sie ein Profil aus </ion-list-header>
+      <ion-item>
+        <ion-label>Profil</ion-label>
+        <ion-select
+          interface="popover"
+          placeholder="Auswählen"
+          [(ngModel)]="profile"
+        >
+          <ion-select-option *ngFor="let profile of profiles" [value]="profile"
+            >{{ profile }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header> 2. Wählen Sie die Backup Aufgaben aus </ion-list-header>
+      <ion-item *ngFor="let task of tasks">
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="task.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header> 3. Wählen Sie ein Sicherungspfad aus </ion-list-header>
+      <ion-item>
+        <ion-label position="floating">Sicherungspfad</ion-label>
+        <ion-input [(ngModel)]="backuppath"></ion-input>
+        <ion-button slot="end" size="small" (click)="getBackupPath()"
+          >Auswählen</ion-button
+        >
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button
+        (click)="save()"
+        [disabled]="!profile || !backuppath || !correctBackupPath"
+        >Sichern</ion-button
+      >
+    </div>
+  </div>
+
+  <div *ngIf="mode == 'restore'" class="ion-margin-top">
+    <ion-list>
+      <ion-list-header> 1. Wählen Sie ein Sicherungspfad aus </ion-list-header>
+      <ion-item>
+        <ion-label position="floating">Sicherungspfad</ion-label>
+        <ion-input [(ngModel)]="restorepath"></ion-input>
+        <ion-button slot="end" size="small" (click)="getRestorePath()"
+          >Auswählen</ion-button
+        >
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group (ionChange)="backupSelect($event)">
+        <ion-list-header> 2. Wählen Sie ein Backup aus </ion-list-header>
+
+        <ion-item *ngFor="let backup of backups">
+          <ion-label>
+            <h2><strong>Profil</strong> {{ backup.profile }}</h2>
+            <p><strong>Datum</strong> {{ backup.date }}</p>
+          </ion-label>
+          <ion-radio [value]="backup"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button
+        (click)="restore()"
+        [disabled]="!selectedBackup || !restorepath"
+        >Wiederherstellen</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

@@ -5,6 +5,9 @@
     "name": "Codext GmbH",
     "email": "software@codext.de"
   },
+  "browser": {
+    "child_process": false
+  },
   "publish": [
     {
       "provider": "generic",
@@ -38,6 +41,7 @@
   "devDependencies": {
     "@angular-builders/custom-webpack": "^10.0.1",
     "@angular-builders/dev-server": "^7.3.1",
+    "@angular-devkit/build-angular": "^0.1100.2",
     "@angular/common": "~11.0.2",
     "@angular/core": "~11.0.2",
     "@angular/forms": "~11.0.2",
@@ -78,7 +82,6 @@
   },
   "dependencies": {
     "@angular-devkit/architect": "~0.1100.2",
-    "@angular-devkit/build-angular": "~0.1100.2",
     "@angular-devkit/core": "~11.0.2",
     "@angular-devkit/schematics": "~11.0.2",
     "@angular/animations": "^11.0.2",
@@ -98,15 +101,18 @@
     "@types/node-cron": "^2.0.3",
     "archiver": "^5.1.0",
     "auto-launch": "^5.0.5",
+    "child_process": "^1.0.2",
     "codelyzer": "^6.0.1",
     "cp-file": "^9.0.0",
     "cpy": "^8.1.1",
     "cron": "^1.8.2",
     "cron-editor": "^2.1.8",
     "cronstrue": "^1.105.0",
+    "crypto": "^1.0.1",
     "electron-log": "^4.3.0",
     "electron-simple-updater": "^2.0.9",
     "electron-updater": "^4.3.5",
+    "fs": "0.0.1-security",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
     "karma": "~5.2.3",
@@ -119,8 +125,11 @@
     "ngx-cron-editor": "^0.6.4",
     "ngx-toastr": "^13.1.0",
     "node-schedule": "^1.3.2",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
     "protractor": "~7.0.0",
     "recursive-copy": "^2.0.11",
+    "stream": "0.0.2",
     "ts-node": "~9.0.0",
     "tslib": "^2.0.3",
     "tslint": "~6.1.0",

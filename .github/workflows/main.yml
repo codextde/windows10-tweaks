@@ -1,0 +1,33 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    # Machine environment:
+    # https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions#ubuntu-1804-lts
+    # We specify the Node.js version manually below, and use versioned Chrome from Puppeteer.
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12.8
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.8
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run electron:windows
+      - name: Create Released Folder
+        run: mkdir released
+      - name: Run Copy File Step
+        run: node build/copy-file.js
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: server01.codext.de:21
+          username: codext_ftp_upload
+          password: ${{ secrets.ftp_password }}
+          local-dir: ./released/
+          server-dir: windows10-tweaks/

@@ -3,30 +3,30 @@ import { ElectronService } from './services/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { Router } from '@angular/router';
-import { version } from '../../package.json';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public version: string = version;
+  // public version: string = version;
   public appPages = [
     {
       title: 'Home',
       url: '/',
-      icon: 'home'
+      icon: 'home',
     },
     {
       title: 'Easy Backup',
       url: '/backup',
-      icon: 'disc'
+      icon: 'disc',
     },
     {
       title: 'Profil Backup & Restore',
       url: '/backuprestore',
-      icon: 'archive'
-    }
+      icon: 'archive',
+    },
     /* {
       title: 'Iventarisierung',
       url: '/inventar',

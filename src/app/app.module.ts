@@ -16,7 +16,6 @@ import { HomeComponent } from './components/home/home.component';
 import { WebviewDirective } from './directives/webview.directive';
 import { ElectronService } from './services/electron.service';
 import { ClientService } from './services/client.service';
-import { CronEditorModule } from 'ngx-cron-editor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -29,7 +28,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent, HomeComponent, WebviewDirective],
   imports: [
-    CronEditorModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -37,7 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastrModule.forRoot(), // ToastrModule added
     IonicStorageModule.forRoot(),
     IonicModule.forRoot({
-      backButtonText: ''
+      backButtonText: '',
     }),
 
     AppRoutingModule,
@@ -45,15 +43,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     ElectronService,
     ClientService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

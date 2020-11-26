@@ -5,7 +5,6 @@ import { HelperService } from '../../../../services/helper.service';
 import { ElectronService } from './../../../../services/electron.service';
 
 import { BackupService } from '../../../../services/backup.service';
-import { CronOptions } from 'ngx-cron-editor';
 
 @Component({
   selector: 'backup-config',
@@ -14,24 +13,6 @@ import { CronOptions } from 'ngx-cron-editor';
 })
 export class BackupConfigComponent implements OnInit {
   @Input() task;
-  public cronOptions: any | CronOptions = {
-    defaultTime: '00:00:00',
-
-    hideMinutesTab: false,
-    hideHourlyTab: false,
-    hideDailyTab: false,
-    hideWeeklyTab: false,
-    hideMonthlyTab: false,
-    hideYearlyTab: false,
-    hideAdvancedTab: false,
-    hideSpecificWeekDayTab: true,
-    hideSpecificMonthWeekTab: true,
-
-    use24HourTime: true,
-    hideSeconds: false,
-
-    cronFlavor: 'standard', //standard or quartz
-  };
 
   correctBackupPath: boolean = false;
   cronExpression: string = '';

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   async loadScripts() {
     this.scripts = await this.http
-      .get('http://localhost:1337/scripts')
+      .get('https://api.windows10-tweaks.codext.de/scripts')
       .toPromise();
   }
 

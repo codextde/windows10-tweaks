@@ -7,8 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
-
+    runs-on: windows-2016
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 12.8
@@ -26,8 +25,8 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: server01.codext.de:21
+          server: server01.codext.de
           username: codext_ftp_upload
           password: ${{ secrets.ftp_password }}
           local-dir: ./released/
-          server-dir: windows10-tweaks/
+          server-dir: ftp.codext.de/windows10-tweaks/

@@ -4,9 +4,32 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> Dashboard </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadScripts()"
+        ><ion-icon name="refresh"></ion-icon
+      ></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="content"></div>
+  <div class="content">
+    <!--<ion-button (click)="runScript()" [disabled]="loading">
+      <ion-spinner *ngIf="loading"></ion-spinner>Test</ion-button
+    >
+    <ion-button (click)="runScriptTest()" [disabled]="loading">
+      <ion-spinner *ngIf="loading"></ion-spinner
+      >ClearRecentlyAccessdFilesScript</ion-button
+    >-->
+
+    <ion-button
+      expand="block"
+      *ngFor="let script of scripts"
+      (click)="runRemoteScript(script)"
+      [disabled]="script.loading"
+    >
+      <ion-spinner *ngIf="script.loading"></ion-spinner>
+      {{ script.name_de }}
+    </ion-button>
+  </div>
 </ion-content>

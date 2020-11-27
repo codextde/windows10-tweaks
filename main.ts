@@ -99,7 +99,7 @@ function createWindow() {
   autoUpdater.checkForUpdates();
 
   let autoLaunch = new AutoLaunch({
-    name: 'Easy File Backup',
+    name: 'Windows 10 - Tweaks',
     path: app.getPath('exe'),
     isHidden: true,
   });
@@ -115,7 +115,7 @@ function createWindow() {
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   win = new BrowserWindow({
-    width: size.width / 3,
+    width: 400,
     height: size.height / 1.5,
     icon: path.join(__dirname, 'data/icon-white.png'),
     show: !hidden,
@@ -144,7 +144,7 @@ function createWindow() {
       },
     },
   ]);
-  tray.setToolTip('Easy File Backup');
+  tray.setToolTip('Windows 10 - Tweaks');
   tray.setContextMenu(contextMenu);
 
   tray.on('click', () => {

@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { NavController, ToastController } from '@ionic/angular';
+import {
+  LoadingController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { ClearRecentlyAccessdFilesScript } from './../../../@codext/scripts/1_clear-recently-accessd-files.script';
 import { EndScript } from './../../../@codext/scripts/end.script';
 import { InitialScript } from './../../../@codext/scripts/initial.script';
@@ -19,16 +23,20 @@ export class HomeComponent implements OnInit {
     private navCtrl: NavController,
     private command: CommandService,
     private toastCtrl: ToastController,
-    private http: HttpClient
+    private http: HttpClient,
+    private loadingCtrl: LoadingController
   ) {}
   async ngOnInit() {
     await this.loadScripts();
   }
 
   async loadScripts() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
     this.scripts = await this.http
       .get('https://api.windows10-tweaks.codext.de/scripts')
       .toPromise();
+    loading.dismiss();
   }
 
   async runRemoteScript(script) {

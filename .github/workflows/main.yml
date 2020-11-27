@@ -30,4 +30,4 @@ jobs:
           username: codext_ftp_upload
           password: ${{ secrets.ftp_password }}
           local-dir: ./released/
-          server-dir: windows10-tweaks/
+          server-dir: ftp.codext.de/windows10-tweaks/

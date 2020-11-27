@@ -26,7 +26,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: server01.codext.de:21
+          server: server01.codext.de
           username: codext_ftp_upload
           password: ${{ secrets.ftp_password }}
           local-dir: ./released/

@@ -69,17 +69,6 @@
   }
 }
 
-ion-card.connection {
-  background: $danger;
-  padding: 10px;
-  color: $light;
-  text-align: center;
-
-  &.connected {
-    background: $success;
-  }
-}
-
 .split-pane {
   top: 30px; // for header
 }

@@ -6,3 +6,9 @@
     background-size: cover;
   }
 }
+ion-button {
+  white-space: pre-wrap;
+  height: fit-content;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}

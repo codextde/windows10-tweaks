@@ -26,7 +26,7 @@
     "start": "npm-run-all -p electron:serve ng:serve",
     "build": "npm run electron:serve-tsc && ng build --base-href ./",
     "build:dev": "npm run build -- -c dev",
-    "build:prod": "NODE_ENV=production ng build --prod",
+    "build:prod": "npm run build -- -c production",
     "ng:serve": "ng serve -o",
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",

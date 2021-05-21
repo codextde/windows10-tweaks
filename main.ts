@@ -1,3 +1,5 @@
+require('@electron/remote/main').initialize();
+
 import * as AutoLaunch from 'auto-launch';
 import {
   app,
@@ -105,7 +107,7 @@ function createWindow() {
   });
   autoLaunch.isEnabled().then((isEnabled) => {
     if (!isEnabled) {
-      autoLaunch.enable();
+      // autoLaunch.enable();
     }
   });
 
@@ -123,7 +125,8 @@ function createWindow() {
     center: true,
     webPreferences: {
       nodeIntegration: true,
-      webSecurity: false,
+      allowRunningInsecureContent: serve ? true : false,
+      contextIsolation: false,
       enableRemoteModule: true,
     },
   });

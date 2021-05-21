@@ -14,7 +14,6 @@ export class InitialScript {
     )
 
 
-    timeout /t 2
     echo.
     echo.
 

@@ -31,7 +31,7 @@
   ],
   "win": {
     "icon": "dist",
-    "target": ["nsis"]
+    "target": ["portable"]
   },
   "nsis": {
     "allowElevation": true,

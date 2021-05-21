@@ -79,7 +79,7 @@ export class ElectronService {
           {
             text: 'Ok',
             handler: () => {
-              resolve();
+              resolve(true);
             },
           },
         ],

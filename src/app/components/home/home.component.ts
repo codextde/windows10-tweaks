@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     private loadingCtrl: LoadingController
   ) {}
+
   async ngOnInit() {
     await this.loadScripts();
   }
@@ -41,26 +42,46 @@ export class HomeComponent implements OnInit {
   }
 
   async runRemoteScript(script) {
-    script.loading = true;
-    console.log(script.script);
+    return new Promise<boolean | string>(async (resolve, reject) => {
+      script.loading = true;
+      console.log(script.script);
 
-    try {
-      const fullScript =
-        InitialScript.script + script.script + EndScript.script;
-      await this.command.batch(fullScript);
-      const toast = await this.toastCtrl.create({
-        message: 'Auftrag erfolgreich ausgeführt',
-        duration: 4000,
-      });
-      toast.present();
-    } catch (error) {
-      const toast = await this.toastCtrl.create({
-        message: 'Fehler beim ausführen des Auftrags',
-        duration: 4000,
-      });
-      toast.present();
-    } finally {
-      script.loading = false;
+      try {
+        const fullScript =
+          InitialScript.script + script.script + EndScript.script;
+        await this.command.batch(fullScript);
+        const toast = await this.toastCtrl.create({
+          message: 'Auftrag erfolgreich ausgeführt',
+          duration: 4000,
+        });
+        toast.present();
+        resolve(true);
+      } catch (error) {
+        const toast = await this.toastCtrl.create({
+          message: 'Fehler beim ausführen des Auftrags',
+          duration: 4000,
+        });
+        toast.present();
+        resolve(error);
+      } finally {
+        script.loading = false;
+      }
+    });
+  }
+
+  start() {
+    this.asyncForEach(this.scripts, async (script) => {
+      if (script.isChecked) {
+        await this.runRemoteScript(script);
+        script.isChecked = false;
+        script.isDone = true;
+      }
+    });
+  }
+
+  async asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
     }
   }
 

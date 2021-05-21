@@ -16,6 +16,7 @@ export class AppComponent {
       title: 'Home',
       url: '/',
       icon: 'home',
+      footer: false,
     },
 
     /* {

@@ -6,10 +6,13 @@
     "email": "software@codext.de"
   },
   "browser": {
-    "child_process": false,
     "fs": false,
     "path": false,
-    "os": false
+    "os": false,
+    "child_process": false,
+    "stream": false,
+    "crypto": false,
+    "bcrypt": false
   },
   "publish": [
     {

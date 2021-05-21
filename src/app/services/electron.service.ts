@@ -8,6 +8,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { AlertController } from '@ionic/angular';
+
+import * as powershell from 'node-powershell';
 @Injectable()
 export class ElectronService {
   ipcRenderer: typeof ipcRenderer;
@@ -24,6 +26,8 @@ export class ElectronService {
 
   upload: boolean = false;
 
+  powershell: typeof powershell;
+
   constructor(private alertController: AlertController) {
     // Conditional imports
     console.log(window.require('electron').remote);
@@ -38,6 +42,7 @@ export class ElectronService {
       this.fs = window.require('fs');
       this.os = window.require('os');
       this.path = window.require('path');
+      this.powershell = window.require('powershell');
 
       const args = this.remote.process.argv.slice(1);
       this.upload = args.some((val) => val === '--upload');

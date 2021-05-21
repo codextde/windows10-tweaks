@@ -12,6 +12,6 @@ if (files[0]) {
     if (err) throw err;
   });
 }
-fs.copyFile('./release/latest.yml', './released/latest.yml', err => {
+/*fs.copyFile('./release/latest.yml', './released/latest.yml', err => {
   if (err) throw err;
-});
+});*/

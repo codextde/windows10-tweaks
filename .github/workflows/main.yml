@@ -3,14 +3,14 @@ name: CI
 on:
   push:
     tags:
-      - "*"
+      - '*'
 
 jobs:
   build:
-    runs-on: windows-2016
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 12.8
+      - uses: actions/checkout@v2
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 14
@@ -29,4 +29,4 @@ jobs:
           username: codext_ftp_upload
           password: ${{ secrets.ftp_password }}
           local-dir: ./released/
-          server-dir: ftp.codext.de/windows10-tweaks/
+          server-dir: windows10-tweaks/

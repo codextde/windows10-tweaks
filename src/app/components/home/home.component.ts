@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
         toast.present();
         resolve(true);
       } catch (error) {
+        console.log('error', error);
         const toast = await this.toastCtrl.create({
           message: 'Fehler beim ausführen des Auftrags',
           duration: 4000,

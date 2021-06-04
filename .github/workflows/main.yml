@@ -30,3 +30,11 @@ jobs:
           password: ${{ secrets.ftp_password }}
           local-dir: ./released/
           server-dir: windows10-tweaks/
+      - name: 📂 GitHub Deploy
+        uses: 'marvinpinto/action-automatic-releases@latest'
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: 'latest'
+          prerelease: false
+          files: |
+            release/*.exe

@@ -70,19 +70,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  start() {
-    this.asyncForEach(this.scripts, async (script) => {
+  async start() {
+    for (let script of this.scripts) {
       if (script.isChecked) {
         await this.runRemoteScript(script);
         script.isChecked = false;
         script.isDone = true;
       }
-    });
-  }
-
-  async asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array);
     }
   }
 

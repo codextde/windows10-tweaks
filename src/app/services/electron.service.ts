@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 
 // If you import a module but never use any of the imported values other than as TypeScript types,
 // the resulting javascript file will look as if you never imported the module at all.
-import { ipcRenderer, webFrame, remote, desktopCapturer } from 'electron';
+import { ipcRenderer, webFrame, desktopCapturer } from 'electron';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { AlertController } from '@ionic/angular';
 import * as powershell from 'node-powershell';
+
+import * as remote from '@electron/remote';
+import * as main from '@electron/remote/main';
+
 @Injectable()
 export class ElectronService {
   ipcRenderer: typeof ipcRenderer;
@@ -16,6 +20,7 @@ export class ElectronService {
 
   webFrame: typeof webFrame;
   remote: typeof remote;
+  main: typeof main;
   childProcess: typeof childProcess;
   fs: typeof fs;
   path: typeof path;
@@ -32,7 +37,8 @@ export class ElectronService {
     if (this.isElectron()) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
       this.webFrame = window.require('electron').webFrame;
-      this.remote = window.require('electron').remote;
+      this.remote = window.require('@electron/remote');
+      this.main = window.require('@electron/remote/main');
       this.window = this.remote.getCurrentWindow();
       this.desktopCapturer = window.require('electron').desktopCapturer;
 

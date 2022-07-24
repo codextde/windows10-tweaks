@@ -6,6 +6,5 @@ export class EndScript {
     echo #######################################
     echo.
     echo.
-
   `;
 }

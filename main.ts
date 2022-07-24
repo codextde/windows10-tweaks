@@ -65,22 +65,6 @@ autoUpdater.on('download-progress', (progressObj) => {
     ')';
   sendStatusToWindow(log_message);
 });
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-  sendStatusToWindow('Update downloaded');
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Neustart', 'Später'],
-    title: 'Anwendungsaktualisierung',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
-    detail:
-      'Eine neue Version wurde heruntergeladen. Starten Sie die Anwendung neu, um die Updates anzuwenden.',
-  };
-
-  dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall();
-  });
-});
-
 function sendStatusToWindow(text) {
   log.info(text);
   // win.webContents.send('message', text);
@@ -117,21 +101,29 @@ function createWindow() {
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   win = new BrowserWindow({
-    width: 400,
-    height: size.height / 1.5,
+    width: 410,
+    minWidth: 250,
+    minHeight: 250,
+    height: 600,
     icon: path.join(__dirname, 'data/icon-white.png'),
     show: !hidden,
-    frame: false,
+    titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
+    frame: process.platform === 'darwin' ? true : false,
     center: true,
+    backgroundColor: '#252a33',
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
       contextIsolation: false,
       enableRemoteModule: true,
-    },
+      // enableRemoteModule: true,
+    } as any,
   });
 
+  require('@electron/remote/main').enable(win.webContents);
+
   const iconPath = path.join(__dirname, 'data/icon-white.png');
+
   tray = new Tray(nativeImage.createFromPath(iconPath));
   const contextMenu = Menu.buildFromTemplate([
     {

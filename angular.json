@@ -116,9 +116,10 @@
       }
     }
   },
-  "defaultProject": "windows10-tweaks",
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
+    "schematicCollections": [
+      "@ionic/angular-toolkit"
+    ]
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
